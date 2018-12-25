@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:portfolio/clouddb.dart';
 import 'package:portfolio/emaxis.dart' as emaxis;
 import 'package:portfolio/main.dart';
 
@@ -178,6 +179,14 @@ class _PortfolioEditPageState extends State<PortfolioEditPage> {
   }
 
   void savePortfolio() {
+    //TODO: Firebaseに接続だけためす
+    var table = PortfolioTable();
+    var record = PortfolioRecord();
+    record.title = _nameController.text;
+    record.associationFundCd = widget.editValue.associationFundCd;
+    record.ratio = int.parse(_ratioController.text);
+    table.insert(record);
+
     Navigator.pushAndRemoveUntil(
         context,
         new MaterialPageRoute(builder: (context) => new TopPage()),
